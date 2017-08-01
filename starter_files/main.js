@@ -100,25 +100,29 @@ let formData = [
 
 for (i=0; i<formData.length; i++) {
   const form = document.querySelector("#fields");
-  const input = document.createElement("input");
-  // if (formData[i].type === 'select') {
-  // const select = document.createElement("select");
-  //   form.appendChild(select);
-  //   for (j=0; j <formData[i].options; j++) {
-  //     select.setAttribute("select", formData[i].options[j].values);
-  //
-  //   }
-  //    }
-    if (formData[i].type === 'textarea' ) {
-    input.setAttribute("textarea", "rows=40");
+
+  if (formData[i].type === "select") {
+const select = document.createElement("select");
+  form.appendChild(select);
+    for (j=0; j <formData[i].options.length; j++) {
+  let option = document.createElement("option");
+select.appendChild(option);
+  option.textContent = formData[i].options[j].label;
+    option.value=formData[i].options[j].value;
+
+  }
     }
-    // else {
-
-
-    form.appendChild(input);
-input.setAttribute("type", formData[i].type);
-  input.setAttribute("placeholder", formData[i].label);
-  input.setAttribute("id",formData[i].id);
-
-
+    else if (formData[i].type === "textarea" ) {
+  const textarea = document.createElement("textarea");
+form.appendChild(textarea);
+  textarea.rows="10";
+    textarea.cols="60";
+    }
+  else {
+const input = document.createElement("input");
+  form.appendChild(input);
+    input.setAttribute("type", formData[i].type);
+      input.setAttribute("placeholder", formData[i].label);
+    input.setAttribute("id", formData[i].id);
+  }
 }
